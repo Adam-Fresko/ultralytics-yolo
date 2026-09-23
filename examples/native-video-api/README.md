@@ -81,7 +81,11 @@ On the configured Mac, the launch agent is
 It starts the localhost API at login and restarts it if it exits.
 Its working directory and log files are under `.local-runtime` in this worktree.
 Do not move or delete this worktree while the service is installed.
-The agent starts idle unless its `EnvironmentVariables` includes `VIDEO_SOURCE`.
+The configured agent uses `.local-runtime/Video Analysis.app` to request macOS camera
+permission before starting Python. Its source is `.local-runtime/camera-launcher.swift`.
+It selects the connected Innomaker USB camera by device identity at startup, then
+passes its current index through `VIDEO_SOURCE`. If that device is absent, the API
+starts idle. The launcher and device-specific settings are local to this Mac.
 
 ```bash
 # Restart the installed API.
